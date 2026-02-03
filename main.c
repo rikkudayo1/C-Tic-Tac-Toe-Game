@@ -90,6 +90,7 @@ void CheckBox(char board[3][3], const char answer[], bool *dupeCheck, char curre
 }
 
 int main() {
+    char start[999];
 
     printf("\n\n");
     printf("<============ Welcome to XO So Good kub! =============>");
@@ -105,6 +106,9 @@ int main() {
     printf("\n ");
     printf("\n<===================================================>");
     printf("\n\n ");
+    printf("Enter anything to start the game: ");
+
+    scanf("%s", &start);
 
     while (true) {
         int rematch = 0;
@@ -137,7 +141,7 @@ int main() {
 
                 CheckBox(currentBoard, currentAnswer, &DuplicateCheck, currentPlayer);
                 if (DuplicateCheck) {
-                    printf("\nThe opponent already took that box!\n");
+                    printf("\nSomeone already took that box!\n");
                 }
 
             } while (!answerCheckStatus || DuplicateCheck);
@@ -148,12 +152,14 @@ int main() {
             ChangePlayer(&currentPlayer);
         }
 
+        ShowCurrentBoard(&currentPlayer, currentBoard);
+
         if (currentWinner == 'T') {
-            printf("\n\n<===================================================>");
             printf("\nTie! Good game!");
-        } else {
             printf("\n\n<===================================================>");
+        } else {
             printf("\n%c wins! good game!", currentWinner);
+            printf("\n\n<===================================================>");
         }
         printf("\n\n Enter '1' to rematch, '0' to quit game : ");
         scanf("%i", &rematch);
